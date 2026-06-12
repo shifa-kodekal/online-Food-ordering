@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>FeastRush — Order Food Online</title>
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Bootstrap 5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet"/>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="style.css"/>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: { 50:'#fff5f0', 100:'#ffe0cc', 200:'#ffb899', 300:'#ff8c5a', 400:'#ff6a2a', 500:'#f04e00', 600:'#c43f00', 700:'#9a3100', 800:'#6e2300', 900:'#421400' },
+            amber: { 400:'#fbbf24', 500:'#f59e0b' }
+          },
+          fontFamily: { display:['Playfair Display','serif'], body:['DM Sans','sans-serif'] }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="font-body bg-stone-50 text-stone-800">
+  <script src=""script.js"></script>
+
+<!-- ============================================================
+     AUTH PAGES (Login / Register)
+     ============================================================ -->
+<div id="auth-section">
+
+  <!-- LOGIN PAGE -->
+  <div id="login-page" class="auth-page active">
+    <div class="auth-bg">
+      <div class="auth-overlay"></div>
+      <div class="auth-card">
+        <div class="auth-logo">
+          <span class="logo-icon"><i class="bi bi-fire"></i></span>
+          <span class="logo-text">FeastRush</span>
+        </div>
+        <h2 class="auth-title">Welcome Back!</h2>
+        <p class="auth-subtitle">Sign in to continue ordering</p>
+
+        <form id="login-form" novalidate>
+          <div class="field-group">
+            <label>Email Address</label>
+            <div class="input-wrap">
+              <i class="bi bi-envelope"></i>
+              <input type="email" id="login-email" placeholder="you@example.com" autocomplete="email"/>
+            </div>
+            <span class="err-msg" id="login-email-err"></span>
+          </div>
+          <div class="field-group">
+            <label>Password</label>
+            <div class="input-wrap">
+              <i class="bi bi-lock"></i>
+              <input type="password" id="login-pass" placeholder="••••••••" autocomplete="current-password"/>
+              <button type="button" class="toggle-pass" onclick="togglePass('login-pass',this)"><i class="bi bi-eye"></i></button>
+            </div>
+            <span class="err-msg" id="login-pass-err"></span>
+          </div>
+          <button type="submit" class="auth-btn">Sign In <i class="bi bi-arrow-right"></i></button>
+        </form>
+
+        <p class="auth-switch">Don't have an account? <a href="#" onclick="showPage('register-page')">Register</a></p>
+
+        <!-- Demo hint -->
+        <p class="demo-hint">Demo: any email + password (6+ chars)</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- REGISTER PAGE -->
+  <div id="register-page" class="auth-page">
+    <div class="auth-bg">
+      <div class="auth-overlay"></div>
+      <div class="auth-card">
+        <div class="auth-logo">
+          <span class="logo-icon"><i class="bi bi-fire"></i></span>
+          <span class="logo-text">FeastRush</span>
+        </div>
+        <h2 class="auth-title">Create Account</h2>
+        <p class="auth-subtitle">Join thousands of food lovers</p>
+
+        <form id="register-form" novalidate>
+          <div class="field-group">
+            <label>Full Name</label>
+            <div class="input-wrap">
+              <i class="bi bi-person"></i>
+              <input type="text" id="reg-name" placeholder="John Doe"/>
+            </div>
+            <span class="err-msg" id="reg-name-err"></span>
+          </div>
+          <div class="field-group">
+            <label>Email Address</label>
+            <div class="input-wrap">
+              <i class="bi bi-envelope"></i>
+              <input type="email" id="reg-email" placeholder="you@example.com"/>
+            </div>
+            <span class="err-msg" id="reg-email-err"></span>
+          </div>
+          <div class="field-group">
+            <label>Phone Number</label>
+            <div class="input-wrap">
+              <i class="bi bi-phone"></i>
+              <input type="tel" id="reg-phone" placeholder="+91 98765 43210"/>
+            </div>
+            <span class="err-msg" id="reg-phone-err"></span>
+          </div>
+          <div class="field-group">
+            <label>Password</label>
+            <div class="input-wrap">
+              <i class="bi bi-lock"></i>
+              <input type="password" id="reg-pass" placeholder="Min 6 characters"/>
+              <button type="button" class="toggle-pass" onclick="togglePass('reg-pass',this)"><i class="bi bi-eye"></i></button>
+            </div>
+            <span class="err-msg" id="reg-pass-err"></span>
+          </div>
+          <div class="field-group">
+            <label>Confirm Password</label>
+            <div class="input-wrap">
+              <i class="bi bi-lock-fill"></i>
+              <input type="password" id="reg-confirm" placeholder="Re-enter password"/>
+              <button type="button" class="toggle-pass" onclick="togglePass('reg-confirm',this)"><i class="bi bi-eye"></i></button>
+            </div>
+            <span class="err-msg" id="reg-confirm-err"></span>
+          </div>
+          <button type="submit" class="auth-btn">Create Account <i class="bi bi-arrow-right"></i></button>
+        </form>
+
+        <p class="auth-switch">Already have an account? <a href="#" onclick="showPage('login-page')">Sign In</a></p>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /auth-section -->
+
+
+<!-- ============================================================
+     MAIN APP
+     ============================================================ -->
+<div id="app-section" class="hidden">
+
+  <!-- NAVBAR -->
+  <nav id="navbar" class="navbar-custom">
+    <div class="nav-inner">
+      <!-- Logo -->
+      <a href="#" class="nav-logo" onclick="showSection('home')">
+        <span class="logo-icon"><i class="bi bi-fire"></i></span>
+        <span class="logo-text">FeastRush</span>
+      </a>
+
+      <!-- Search (hidden on mobile, shown in menu) -->
+      <div class="nav-search" id="nav-search-bar">
+        <i class="bi bi-search"></i>
+        <input type="text" id="search-input" placeholder="Search for dishes, restaurants…" oninput="handleSearch(this.value)"/>
+      </div>
+
+      <!-- Right Actions -->
+      <div class="nav-actions">
+        <button class="nav-btn" onclick="showSection('home')" title="Menu"><i class="bi bi-house-door"></i><span>Menu</span></button>
+        <button class="nav-btn cart-btn" onclick="showSection('cart')" title="Cart">
+          <i class="bi bi-bag"></i>
+          <span>Cart</span>
+          <span class="cart-badge" id="cart-count">0</span>
+        </button>
+        <div class="nav-user" onclick="toggleUserMenu()">
+          <i class="bi bi-person-circle"></i>
+          <span id="nav-username">Guest</span>
+          <i class="bi bi-chevron-down"></i>
+          <div class="user-dropdown" id="user-dropdown">
+            <a href="#"><i class="bi bi-person"></i> Profile</a>
+            <a href="#"><i class="bi bi-clock-history"></i> Orders</a>
+            <a href="#" onclick="logout()"><i class="bi bi-box-arrow-right"></i> Logout</a>
+          </div>
+        </div>
+        <!-- Mobile hamburger -->
+        <button class="hamburger" onclick="toggleMobileMenu()" id="hamburger-btn">
+          <i class="bi bi-list"></i>
+        </button>
+      </div>
+    </div>
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobile-menu">
+      <div class="mobile-search">
+        <i class="bi bi-search"></i>
+        <input type="text" placeholder="Search for dishes…" oninput="handleSearch(this.value)"/>
+      </div>
+      <a href="#" onclick="showSection('home');toggleMobileMenu()"><i class="bi bi-house-door"></i> Menu</a>
+      <a href="#" onclick="showSection('cart');toggleMobileMenu()"><i class="bi bi-bag"></i> Cart <span class="cart-badge ml-1" id="cart-count-mob">0</span></a>
+      <a href="#" onclick="logout()"><i class="bi bi-box-arrow-right"></i> Logout</a>
+    </div>
+  </nav>
+
+
+  <!-- =================== HOME / MENU SECTION =================== -->
+  <section id="home-section" class="app-section">
+
+    <!-- Hero Banner -->
+    <div class="hero-banner">
+      <div class="hero-content">
+        <p class="hero-tag"><i class="bi bi-lightning-fill"></i> Fast Delivery • 20–40 min</p>
+        <h1 class="hero-title">Craving Something<br/><span>Delicious?</span></h1>
+        <p class="hero-sub">Order from the best restaurants in your city. Hot, fresh & on time.</p>
+        <div class="hero-stats">
+          <div><span>500+</span><p>Restaurants</p></div>
+          <div><span>50k+</span><p>Happy Customers</p></div>
+          <div><span>4.8★</span><p>Avg Rating</p></div>
+        </div>
+      </div>
+      <div class="hero-img">
+        <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=600&q=80" alt="Food"/>
+      </div>
+    </div>
+
+    <!-- Category Filter -->
+    <div class="section-wrap">
+      <h2 class="section-title">Browse Categories</h2>
+      <div class="category-strip" id="category-strip">
+        <button class="cat-btn active" onclick="filterCategory('All',this)">
+          <span class="cat-icon">🍽️</span><span>All</span>
+        </button>
+        <button class="cat-btn" onclick="filterCategory('Veg',this)">
+          <span class="cat-icon">🥗</span><span>Veg</span>
+        </button>
+        <button class="cat-btn" onclick="filterCategory('Non-Veg',this)">
+          <span class="cat-icon">🍗</span><span>Non-Veg</span>
+        </button>
+        <button class="cat-btn" onclick="filterCategory('Pizza',this)">
+          <span class="cat-icon">🍕</span><span>Pizza</span>
+        </button>
+        <button class="cat-btn" onclick="filterCategory('Burgers',this)">
+          <span class="cat-icon">🍔</span><span>Burgers</span>
+        </button>
+        <button class="cat-btn" onclick="filterCategory('Drinks',this)">
+          <span class="cat-icon">🥤</span><span>Drinks</span>
+        </button>
+        <button class="cat-btn" onclick="filterCategory('Desserts',this)">
+          <span class="cat-icon">🍰</span><span>Desserts</span>
+        </button>
+        <button class="cat-btn" onclick="filterCategory('Chinese',this)">
+          <span class="cat-icon">🍜</span><span>Chinese</span>
+        </button>
+      </div>
+
+      <!-- Menu Grid -->
+      <h2 class="section-title mt-8">
+        Our Menu
+        <span class="result-count" id="result-count"></span>
+      </h2>
+      <div id="menu-grid" class="menu-grid"></div>
+      <div id="no-results" class="no-results hidden">
+        <i class="bi bi-search"></i>
+        <p>No dishes found. Try a different search!</p>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- =================== CART SECTION =================== -->
+  <section id="cart-section" class="app-section hidden">
+    <div class="section-wrap">
+      <div class="page-header">
+        <button class="back-btn" onclick="showSection('home')"><i class="bi bi-arrow-left"></i></button>
+        <h2 class="page-title">Your Cart</h2>
+      </div>
+
+      <div id="cart-empty" class="empty-state hidden">
+        <div class="empty-icon">🛒</div>
+        <h3>Your cart is empty</h3>
+        <p>Add some delicious food to get started!</p>
+        <button onclick="showSection('home')" class="primary-btn mt-4">Browse Menu</button>
+      </div>
+
+      <div id="cart-content" class="cart-layout">
+        <!-- Cart Items -->
+        <div class="cart-items-panel">
+          <div id="cart-items-list"></div>
+        </div>
+        <!-- Order Summary -->
+        <div class="order-summary-panel">
+          <div class="summary-card">
+            <h3 class="summary-title">Order Summary</h3>
+            <div class="summary-line"><span>Subtotal</span><span id="sum-subtotal">₹0</span></div>
+            <div class="summary-line"><span>Delivery Fee</span><span id="sum-delivery">₹40</span></div>
+            <div class="summary-line discount"><span>Discount (10%)</span><span id="sum-discount">-₹0</span></div>
+            <div class="summary-divider"></div>
+            <div class="summary-line total"><span>Total</span><span id="sum-total">₹0</span></div>
+            <button class="primary-btn w-full mt-4" onclick="showSection('checkout')">
+              <i class="bi bi-bag-check"></i> Proceed to Checkout
+            </button>
+            <button class="secondary-btn w-full mt-2" onclick="showSection('home')">
+              <i class="bi bi-plus"></i> Add More Items
+            </button>
+          </div>
+
+          <!-- Promo Code -->
+          <div class="promo-card">
+            <h4><i class="bi bi-ticket-perforated"></i> Promo Code</h4>
+            <div class="promo-input-wrap">
+              <input type="text" id="promo-input" placeholder="Enter code (FEAST10)"/>
+              <button onclick="applyPromo()">Apply</button>
+            </div>
+            <span id="promo-msg"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- =================== CHECKOUT SECTION =================== -->
+  <section id="checkout-section" class="app-section hidden">
+    <div class="section-wrap">
+      <div class="page-header">
+        <button class="back-btn" onclick="showSection('cart')"><i class="bi bi-arrow-left"></i></button>
+        <h2 class="page-title">Checkout</h2>
+      </div>
+
+      <div class="checkout-layout">
+        <!-- Address Form -->
+        <div class="checkout-form-panel">
+          <div class="form-card">
+            <h3 class="form-section-title"><i class="bi bi-geo-alt-fill"></i> Delivery Address</h3>
+            <form id="checkout-form" novalidate>
+              <div class="row g-3">
+                <div class="col-md-6">
+                  <label>Full Name *</label>
+                  <input type="text" id="co-name" class="form-input" placeholder="John Doe"/>
+                  <span class="err-msg" id="co-name-err"></span>
+                </div>
+                <div class="col-md-6">
+                  <label>Phone *</label>
+                  <input type="tel" id="co-phone" class="form-input" placeholder="+91 98765 43210"/>
+                  <span class="err-msg" id="co-phone-err"></span>
+                </div>
+                <div class="col-12">
+                  <label>Street Address *</label>
+                  <input type="text" id="co-street" class="form-input" placeholder="123, MG Road"/>
+                  <span class="err-msg" id="co-street-err"></span>
+                </div>
+                <div class="col-md-4">
+                  <label>City *</label>
+                  <input type="text" id="co-city" class="form-input" placeholder="Bengaluru"/>
+                  <span class="err-msg" id="co-city-err"></span>
+                </div>
+                <div class="col-md-4">
+                  <label>State *</label>
+                  <input type="text" id="co-state" class="form-input" placeholder="Karnataka"/>
+                  <span class="err-msg" id="co-state-err"></span>
+                </div>
+                <div class="col-md-4">
+                  <label>PIN Code *</label>
+                  <input type="text" id="co-pin" class="form-input" placeholder="560001"/>
+                  <span class="err-msg" id="co-pin-err"></span>
+                </div>
+                <div class="col-12">
+                  <label>Delivery Instructions (optional)</label>
+                  <textarea id="co-instructions" class="form-input" rows="2" placeholder="Ring the bell twice…"></textarea>
+                </div>
+              </div>
+            </form>
+          </div>
+
+          <!-- Payment Method -->
+          <div class="form-card mt-4">
+            <h3 class="form-section-title"><i class="bi bi-credit-card-fill"></i> Payment Method</h3>
+            <div class="payment-options">
+              <label class="pay-option active">
+                <input type="radio" name="payment" value="cod" checked/>
+                <i class="bi bi-cash-coin"></i> Cash on Delivery
+              </label>
+              <label class="pay-option">
+                <input type="radio" name="payment" value="upi"/>
+                <i class="bi bi-phone-fill"></i> UPI / GPay
+              </label>
+              <label class="pay-option">
+                <input type="radio" name="payment" value="card"/>
+                <i class="bi bi-credit-card"></i> Debit/Credit Card
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <!-- Order Summary -->
+        <div class="checkout-summary-panel">
+          <div class="summary-card">
+            <h3 class="summary-title">Order Review</h3>
+            <div id="checkout-items-list" class="checkout-items"></div>
+            <div class="summary-divider mt-3"></div>
+            <div class="summary-line"><span>Subtotal</span><span id="co-subtotal">₹0</span></div>
+            <div class="summary-line"><span>Delivery Fee</span><span>₹40</span></div>
+            <div class="summary-line discount"><span>Discount</span><span id="co-discount">-₹0</span></div>
+            <div class="summary-divider"></div>
+            <div class="summary-line total"><span>Total</span><span id="co-total">₹0</span></div>
+            <button class="primary-btn w-full mt-4" onclick="placeOrder()">
+              <i class="bi bi-bag-check-fill"></i> Place Order
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- =================== ORDER SUCCESS SECTION =================== -->
+  <section id="success-section" class="app-section hidden">
+    <div class="success-wrap">
+      <div class="success-card">
+        <div class="success-anim">
+          <div class="check-circle">
+            <i class="bi bi-check-lg"></i>
+          </div>
+        </div>
+        <h2>Order Placed! 🎉</h2>
+        <p>Your food is being prepared and will arrive shortly.</p>
+        <div class="order-track">
+          <div class="track-step done"><i class="bi bi-check-circle-fill"></i><span>Order Confirmed</span></div>
+          <div class="track-line"></div>
+          <div class="track-step active"><i class="bi bi-fire"></i><span>Preparing</span></div>
+          <div class="track-line"></div>
+          <div class="track-step"><i class="bi bi-bicycle"></i><span>On the Way</span></div>
+          <div class="track-line"></div>
+          <div class="track-step"><i class="bi bi-house-check"></i><span>Delivered</span></div>
+        </div>
+        <p class="eta-text"><i class="bi bi-clock"></i> Estimated time: <strong>25–35 minutes</strong></p>
+        <button class="primary-btn mt-4" onclick="backToHome()">Back to Menu</button>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- FOOTER -->
+  <footer class="app-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="auth-logo mb-2">
+          <span class="logo-icon"><i class="bi bi-fire"></i></span>
+          <span class="logo-text">FeastRush</span>
+        </div>
+        <p>Hot food, fast delivery. Because great food<br/>should never make you wait.</p>
+        <div class="social-links">
+          <a href="#"><i class="bi bi-instagram"></i></a>
+          <a href="#"><i class="bi bi-twitter-x"></i></a>
+          <a href="#"><i class="bi bi-facebook"></i></a>
+          <a href="#"><i class="bi bi-youtube"></i></a>
+        </div>
+      </div>
+      <div class="footer-links">
+        <h4>Quick Links</h4>
+        <a href="#">Home</a>
+        <a href="#">About Us</a>
+        <a href="#">Partner With Us</a>
+        <a href="#">Careers</a>
+      </div>
+      <div class="footer-links">
+        <h4>Support</h4>
+        <a href="#">Help Center</a>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+        <a href="#">Refund Policy</a>
+      </div>
+      <div class="footer-contact">
+        <h4>Contact Us</h4>
+        <p><i class="bi bi-telephone-fill"></i> +91 98765 43210</p>
+        <p><i class="bi bi-envelope-fill"></i> support@feastrush.com</p>
+        <p><i class="bi bi-geo-alt-fill"></i> 42, Koramangala, Bengaluru</p>
+        <div class="app-badges mt-3">
+          <a href="#" class="app-badge"><i class="bi bi-apple"></i> App Store</a>
+          <a href="#" class="app-badge"><i class="bi bi-google-play"></i> Play Store</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 FeastRush. All rights reserved. Made with <i class="bi bi-heart-fill text-brand-400"></i> for food lovers.</p>
+    </div>
+  </footer>
+
+</div><!-- /app-section -->
+
+
+<!-- TOAST NOTIFICATION -->
+<div id="toast" class="toast-notify hidden">
+  <i class="bi bi-check-circle-fill"></i>
+  <span id="toast-msg">Item added!</span>
+</div>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
